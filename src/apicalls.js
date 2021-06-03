@@ -243,6 +243,25 @@ export const getMyCanvas = async (canvasID) => {
   }
 };
 
+export const deleteMyCanvas = async (canvasID) => {
+  console.log(canvasID);
+  try {
+    const res = await (
+      await fetch(`${url}/canvas/${canvasID}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // send in cookies (=> token)
+      })
+    ).json();
+
+    return res;
+  } catch (error) {
+    return error;
+  }
+}
+
 
 
 export const verifyEmail = async (data) => {

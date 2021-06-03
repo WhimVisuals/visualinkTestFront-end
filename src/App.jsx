@@ -13,6 +13,7 @@ import {
   updateUser,
   whoAmI,
   getMyCanvas,
+  deleteMyCanvas,
 } from "./apicalls";
 import data from "./data.json";
 import data2 from "./data2.json";
@@ -94,6 +95,7 @@ export default function App() {
     console.log(res);
   }
 
+
   const showMyWork = async () => {
     const res = await getMyCanvases();
     console.log(res);
@@ -101,6 +103,11 @@ export default function App() {
 
   const getOneCanvas = async () => {
     const res = await getMyCanvas('28');
+    console.log(res);
+  }
+
+  const deteleCanvas = async () => {
+    const res = await deleteMyCanvas('29');
     console.log(res);
   }
 
@@ -165,6 +172,7 @@ export default function App() {
       <button onClick={showMyWork}>get my work</button>
       <button onClick={modifyCanvas}>update my work</button>
       <button onClick={getOneCanvas}>get one canvas </button>
+      <button onClick={deteleCanvas}>delete one canvas</button>
       <Switch>
         <Route exact path="/verify/:verifToken" component={VerificationEmail} />
       </Switch>
