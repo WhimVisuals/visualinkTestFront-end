@@ -8,9 +8,14 @@ import {
   loginUser,
   logOut,
   addNewCanvas,
+  getMyCanvases,
+  updateCanvas,
+  updateUser,
+  whoAmI,
   getMyCanvas,
 } from "./apicalls";
 import data from "./data.json";
+import data2 from "./data2.json";
 import VerificationEmail from "./VerificationEmail";
 
 export default function App() {
@@ -18,6 +23,8 @@ export default function App() {
   const [myCanvases, setMyCanvases] = useState(null);
   const [loginEmail, setLoginEmail] = useState(null);
   const [loginPass, setLoginPass] = useState(null);
+  const [updateName, setUpdateName] = useState(null);
+  const [updateEmail, setUpdateEmail] = useState(null);
 
   useEffect(() => {
     (async function () {
@@ -29,7 +36,7 @@ export default function App() {
     })();
   }, []);
 
-  const { register, handleSubmit, errors } = useForm();
+  const { register, update, handleSubmit, errors } = useForm();
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -49,6 +56,22 @@ export default function App() {
     setUserInfo(res);
   };
 
+  const onUpdateUser = async () => {
+
+    const data = {
+      username: 'gemma',
+    };
+    console.log(data);
+    const res = await updateUser(data);
+    console.log(res);
+  };
+
+  const meUser = async () => {
+    console.log("me");
+    const res = await whoAmI();
+    console.log(res);
+  }; 
+
   const handleLogOut = async () => {
     const res = await logOut();
     if (!res.errors) {
@@ -61,10 +84,25 @@ export default function App() {
     console.log(res);
   };
 
+  const modifyCanvas = async () => {
+    const canvasID = "29";
+    const data = {
+      canvas_name : 'new name',
+      canvas_json : data2,
+    }
+    const res = await updateCanvas(canvasID,data);
+    console.log(res);
+  }
+
   const showMyWork = async () => {
-    const res = await getMyCanvas();
+    const res = await getMyCanvases();
     console.log(res);
   };
+
+  const getOneCanvas = async () => {
+    const res = await getMyCanvas('28');
+    console.log(res);
+  }
 
   return (
     <Router>
@@ -111,9 +149,22 @@ export default function App() {
         <button type="submit">submit</button>
       </form>
 
+      <form onSubmit={handleSubmit(onUpdateUser)}>
+        <input
+          type="text"
+          placeholder="username"
+          name="username"
+          ref={update}
+        />
+
+        <input type="submit" />
+      </form>
+      <button onClick={meUser}>Me</button>
       <button onClick={handleLogOut}>Log out</button>
       <button onClick={saveCanvas}>save my work</button>
       <button onClick={showMyWork}>get my work</button>
+      <button onClick={modifyCanvas}>update my work</button>
+      <button onClick={getOneCanvas}>get one canvas </button>
       <Switch>
         <Route exact path="/verify/:verifToken" component={VerificationEmail} />
       </Switch>

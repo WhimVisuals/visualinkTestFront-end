@@ -1,0 +1,65 @@
+{
+    "name": "Thought and Perception",
+    "keywords": "thought, thinking, perception, perceiving, picturing, imagination, imagine",
+    "description": "",
+    "type": "icon",
+    "icon": {
+        "prefix": "svg",
+        "name": "./images/landscapes/laThoughtPerception.svg"
+    },
+    "option": {
+        "type": "group",
+        "originX": "left",
+        "originY": "top",
+        "width": 553,
+        "height": 650,
+        "name": "Perception",
+        "numObjects": 56,
+        "objects": [
+            {
+                "type": "svg",
+                "originX": "left",
+                "originY": "top",
+                "left": -267,
+                "top": -67,
+                "width": 415,
+                "height": 384,
+                "svg": "./images/landscapes/elements/perception_418.svg",
+                "name": "Cone of Perception"
+            },
+            {
+                "type": "svg",
+                "originX": "left",
+                "originY": "top",
+                "left": 158,
+                "top": 63,
+                "width": 121,
+                "height": 213,
+                "svg": "./images/landscapes/elements/personLeft_121.svg",
+                "name": "Person Left"
+            },
+            {
+                "type": "svg",
+                "originX": "left",
+                "originY": "top",
+                "left": -190,
+                "top": -328,
+                "width": 380,
+                "height": 411,
+                "svg": "./images/landscapes/elements/thought_380.svg",
+                "name": "Thought"
+            },
+            {
+                "type": "svg",
+                "originX": "left",
+                "originY": "top",
+                "left": -190,
+                "top": -328,
+                "width": 380,
+                "height": 411,
+                "svg": "./images/landscapes/elements/thought_380.svg",
+                "name": "Thought"
+            }
+        ]
+    }
+}

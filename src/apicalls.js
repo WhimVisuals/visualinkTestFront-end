@@ -41,6 +41,27 @@ export const authenticateUser = async () => {
   }
 };
 
+export const whoAmI = async () => {
+  const user = await authenticateUser();
+  console.log(user);
+  // try {
+  //   const res = await (
+  //     await fetch(`${url}/users/${user.id}`, {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         credentials: "include", // send in cookies (=> token)
+  //       })
+  //   ).json();
+
+  //   console.log (res);
+  //   return res;
+  // } catch (error) {
+  //   return error;
+  // }
+}
+
 export const signUpUser = async (data) => {
   try {
     console.log(data)
@@ -77,8 +98,9 @@ export const logOut = async (data) => {
         credentials: "include",
       })
     ).json();
-
+    console.log(res);
     return res;
+    
   } catch (error) {
     return [];
   }
@@ -99,6 +121,33 @@ export const getAllUsers = async () => {
     return res;
   } catch (error) {
     return error;
+  }
+};
+
+export const updateUser = async (data) => {
+  const user = await authenticateUser();
+  console.log(user.id);
+  console.log(data);
+  try {
+    const res = await (
+      await fetch(`${url}/users/${user.id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+
+    console.log(res);
+
+    return res;
+  } catch (error) {
+    // catch route is NOT called on error responses from the backend
+    // like 404 and 500
+    console.log(error);
+    return [];
   }
 };
 
@@ -129,7 +178,35 @@ export const addNewCanvas = async (data) => {
   }
 };
 
-export const getMyCanvas = async () => {
+export const updateCanvas = async (canvasID,data) => {
+  console.log(data);
+
+  try {
+    const res = await (
+      await fetch(`${url}/canvas/${canvasID}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+
+    console.log(res);
+
+    return res;
+  } catch (error) {
+    // catch route is NOT called on error responses from the backend
+    // like 404 and 500
+    console.log(error);
+    return [];
+  }
+};
+
+
+
+export const getMyCanvases = async () => {
   try {
     const res = await (
       await fetch(`${url}/users/mycanvas`, {
@@ -146,6 +223,26 @@ export const getMyCanvas = async () => {
     return error;
   }
 };
+
+export const getMyCanvas = async (canvasID) => {
+  console.log(canvasID);
+  try {
+    const res = await (
+      await fetch(`${url}/canvas/${canvasID}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // send in cookies (=> token)
+      })
+    ).json();
+
+    return res;
+  } catch (error) {
+    return error;
+  }
+};
+
 
 
 export const verifyEmail = async (data) => {
