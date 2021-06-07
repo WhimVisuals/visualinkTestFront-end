@@ -44,22 +44,22 @@ export const authenticateUser = async () => {
 export const whoAmI = async () => {
   const user = await authenticateUser();
   console.log(user);
-  // try {
-  //   const res = await (
-  //     await fetch(`${url}/users/${user.id}`, {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         credentials: "include", // send in cookies (=> token)
-  //       })
-  //   ).json();
+  try {
+    const res = await (
+      await fetch(`${url}/users/${user.id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include", // send in cookies (=> token)
+        })
+    ).json();
 
-  //   console.log (res);
-  //   return res;
-  // } catch (error) {
-  //   return error;
-  // }
+    console.log (res);
+    return res;
+  } catch (error) {
+    return error;
+  }
 }
 
 export const signUpUser = async (data) => {
@@ -151,6 +151,29 @@ export const updateUser = async (data) => {
   }
 };
 
+
+export const deleteUserTemporarily = async (data) => {
+  try {
+    const res = await (
+      await fetch(`${url}/users/temporarilyDelete`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // send in cookies (=> token)
+      })
+    ).json();
+    console.log(res);
+    return res;
+    
+  } catch (error) {
+    return error;
+  }
+};
+
+
+
 export const addNewCanvas = async (data) => {
   console.log(data);
   
@@ -179,6 +202,7 @@ export const addNewCanvas = async (data) => {
 };
 
 export const updateCanvas = async (canvasID,data) => {
+  console.log(canvasID);
   console.log(data);
 
   try {
@@ -217,8 +241,9 @@ export const getMyCanvases = async () => {
         credentials: "include", // send in cookies (=> token)
       })
     ).json();
-
+    console.log(res);
     return res;
+    
   } catch (error) {
     return error;
   }
@@ -237,6 +262,7 @@ export const getMyCanvas = async (canvasID) => {
       })
     ).json();
 
+    console.log(res);
     return res;
   } catch (error) {
     return error;

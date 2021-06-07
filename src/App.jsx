@@ -14,6 +14,7 @@ import {
   whoAmI,
   getMyCanvas,
   deleteMyCanvas,
+  deleteUserTemporarily,
 } from "./apicalls";
 import data from "./data.json";
 import data2 from "./data2.json";
@@ -60,8 +61,13 @@ export default function App() {
   const onUpdateUser = async () => {
 
     const data = {
-      username: 'gemma',
+      username: 'gemma2',
+      email: 'gemma@gemma2',
     };
+    // const data = {
+    //   username: updateName,
+    //   email: updateName,
+    // };
     console.log(data);
     const res = await updateUser(data);
     console.log(res);
@@ -86,7 +92,7 @@ export default function App() {
   };
 
   const modifyCanvas = async () => {
-    const canvasID = "29";
+    const canvasID = "30";
     const data = {
       canvas_name : 'new name',
       canvas_json : data2,
@@ -102,12 +108,17 @@ export default function App() {
   };
 
   const getOneCanvas = async () => {
-    const res = await getMyCanvas('28');
+    const res = await getMyCanvas('30');
     console.log(res);
   }
 
   const deteleCanvas = async () => {
     const res = await deleteMyCanvas('29');
+    console.log(res);
+  }
+
+  const deteleMe = async () => {
+    const res = await deleteUserTemporarily('59');
     console.log(res);
   }
 
@@ -156,14 +167,14 @@ export default function App() {
         <button type="submit">submit</button>
       </form>
 
-      <form onSubmit={handleSubmit(onUpdateUser)}>
+      <form onSubmit={onUpdateUser}>
         <input
           type="text"
           placeholder="username"
           name="username"
           ref={update}
         />
-
+        <input type="email" placeholder="email" name="email" ref={update} />
         <input type="submit" />
       </form>
       <button onClick={meUser}>Me</button>
@@ -173,6 +184,7 @@ export default function App() {
       <button onClick={modifyCanvas}>update my work</button>
       <button onClick={getOneCanvas}>get one canvas </button>
       <button onClick={deteleCanvas}>delete one canvas</button>
+      <button onClick={deteleMe}>delete user temporarily</button>
       <Switch>
         <Route exact path="/verify/:verifToken" component={VerificationEmail} />
       </Switch>
